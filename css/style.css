@@ -1,3 +1,47 @@
 body {
     text-align: center;
 }
+
+h1 {
+    margin: 0 auto;
+}
+
+h4,
+h5 {
+    width: 100%;
+    margin: 0;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.instructions {
+    width: 30%;
+}
+
+ul {
+    text-align: left;
+}
+
+#game {
+    width: 40%;
+}
+
+.scores {
+    width: 30%;
+    height: auto;
+}
+
+.score-title {
+    height: 50px;
+}
+
+.enemyScores {
+    width: 50%;
+}
+
+.playerScores {
+    width: 50%;
+}

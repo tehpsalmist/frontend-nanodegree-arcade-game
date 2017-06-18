@@ -2,11 +2,58 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Frogger Revisited</title>
+    <title>No No, Abi!</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div>
+        <h1>
+            No, No, Abi!
+        </h1>
+        <h3>
+            Hey, you! Princess Abi needs your help!<br>She must retrieve all her toys from the pool and bring them to the rock, without touching any of the yucky bugs in the road.<br>Can you guide her safely through this task?
+        </h3>
+    </div>
+    <div class="d-flex">
+        <div class="instructions">
+            <h4>
+                Instructions
+            </h4>
+            <ul>
+                <li>Use the arrow keys on your keyboard to move Abi.</li>
+                <li>Make your way carefully across the road to pick up the toys one at a time.</li>
+                <li>Bring each toy to the rock to deposit it and free your hands for another toy.</li>
+                <li>Don't touch the bugs, or you'll drop your toy and be forced to restart!</li>
+            </ul>
+        </div>
+        <div id=game>
+        </div>
+        <div class="scores">
+            <h4 class="score-title">
+                Scoreboard
+            </h4>
+            <div class="d-flex">
+                <div class="enemyScores">
+                    <h5>
+                        Yucky Bugs
+                    </h5>
+                    <p id="enemyPoints">
+                    </p>
+                </div>
+                <div class="playerScores">
+                    <h5>
+                        You
+                    </h5>
+                    <p id="playerPoints">
+                    </p>
+                </div>
+            </div>
+            <h5>
+                Toys Retrieved
+            </h5>
+            <p id="toysRetrieved">
+            </p>
+        </div>
     </div>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>

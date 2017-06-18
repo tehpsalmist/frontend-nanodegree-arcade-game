@@ -27,7 +27,7 @@ var Engine = (function(global) {
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    doc.getElementById("game").appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -95,6 +95,9 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+        allToys.forEach(function(toy) {
+            toy.update();
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -150,7 +153,10 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        rock.render();
+        allToys.forEach(function(toy) {
+            toy.render();
+        });
         player.render();
     }
 
@@ -171,7 +177,21 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/enemy-bug-rev.png',
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
+        'images/Gem Blue.png',
+        'images/Gem Green.png',
+        'images/Gem Orange.png',
+        'images/Heart.png',
+        'images/Key.png',
+        'images/Rock.png',
+        'images/Selector.png',
+        'images/Star.png',
+
     ]);
     Resources.onReady(init);
 
