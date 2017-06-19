@@ -379,3 +379,8 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// Event handler for reset button
+document.getElementById("reload").addEventListener("click", function(){
+    location.reload(true);
+});

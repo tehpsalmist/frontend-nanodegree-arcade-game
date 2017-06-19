@@ -45,3 +45,7 @@ ul {
 .playerScores {
     width: 50%;
 }
+
+#reload {
+    font-size: 20px;
+}
