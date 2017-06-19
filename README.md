@@ -1,6 +1,25 @@
-frontend-nanodegree-arcade-game
+# No, No, Abi!
+#### A Frogger Knock-off, Inspired by My Little Girl.
 ===============================
+This game is very simple, and for now, is only one level. Enjoy!
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## How to Run the Game
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+Simply open this link in a desktop browser, and off you go!
+[No, No, Abi!](https://tehpsalmist.github.io/frontend-nanodegree-arcade-game/)
+
+*Note: this will not work on a mobile device, though I did try to make a d-pad. The trouble with these games in a mobile browser (other than slow responsiveness), is that the double-tap function often causes zooming and other features, rather than executing the move function twice. It's rather frustrating when you're frantically trying to escape the yucky bugs. However, stay tuned, and there may be an update coming for mobile!*
+
+## How to Play the Game
+
+Abi's toys are still in the pool, and she needs to collect them and bring them back to the rock. Using the arrow keys on your keyboard, guide her safely across the road to pick up the toys, then safely back to deposit them at the rock. Can you retrieve all the toys without touching any of the yucky bugs?
+
+##### Things to keep in mind:
+* You can only carry one toy at a time.
+* Toys are automatically picked up and dropped off when you reach their appropriate locations.
+* Don't touch the yucky bugs! You will have to restart, and so does the toy you were carrying!
+* Every time you touch a yucky bug, they get a point. That's bad. No, no, Abi!
+* Every time you deposit a toy at the rock, you get a point. Great job, Abi!
+* Compare your score with the bugs at the end, and if you don't like it, hit Reset and try again!
+
+### Good Luck!
