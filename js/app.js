@@ -407,6 +407,8 @@ document.getElementById("reload").addEventListener("click", function(){
     location.reload(true);
 });
 // Event handlers for the d-pad buttons, to try out mobile play
+/* Unfortunately, it didn't work smoothly enough.
+
 document.getElementById("up").addEventListener("click", function(){
     if (player.y > 0) {
         player.y -= 83;
@@ -430,3 +432,4 @@ document.getElementById("right").addEventListener("click", function(){
         ctx.clearRect(0, 0, 505, 100);
     };
 });
+*/

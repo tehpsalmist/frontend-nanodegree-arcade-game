@@ -25,6 +25,10 @@ ul {
     text-align: left;
 }
 
+/*
+
+Failed d-pad attempt
+
 .d-pad {
     height: 300px;
     width: 100%;
@@ -40,6 +44,8 @@ ul {
     width: 50%;
     height: 40%;
 }
+
+*/
 
 #game {
     width: 40%;
