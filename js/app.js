@@ -406,3 +406,27 @@ document.addEventListener('keyup', function(e) {
 document.getElementById("reload").addEventListener("click", function(){
     location.reload(true);
 });
+// Event handlers for the d-pad buttons, to try out mobile play
+document.getElementById("up").addEventListener("click", function(){
+    if (player.y > 0) {
+        player.y -= 83;
+    };
+});
+document.getElementById("down").addEventListener("click", function(){
+    if (player.y < 400) {
+        player.y += 83;
+        ctx.clearRect(0, 0, 505, 100);
+    };
+});
+document.getElementById("left").addEventListener("click", function(){
+    if (player.x > 5) {
+        player.x -= 30;
+        ctx.clearRect(0, 0, 505, 100);
+    };
+});
+document.getElementById("right").addEventListener("click", function(){
+    if (player.x < 400) {
+        player.x += 30;
+        ctx.clearRect(0, 0, 505, 100);
+    };
+});

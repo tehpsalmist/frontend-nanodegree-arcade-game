@@ -20,14 +20,27 @@
                 Instructions
             </h4>
             <ul>
-                <li>Use the arrow keys on your keyboard to move Abi.</li>
+                <li>Use the arrow keys on your keyboard to move Abi, or tap the d-pad below.</li>
                 <li>Make your way carefully across the road to pick up the toys one at a time.</li>
                 <li>Bring each toy to the rock to deposit it and free your hands for another toy.</li>
                 <li>Don't touch the bugs, or you'll drop your toy and be forced to restart!</li>
                 <li>See if you can bring back all of the toys without touching any bugs.</li>
                 <li>Not happy with the score? Reset the game to try again.</li>
             </ul>
-            <button id="reload">Reset</button>
+            <div class="d-pad d-flex">
+                <button id="up">
+                    UP
+                </button>
+                <button id="left">
+                    LEFT
+                </button>
+                <button id="right">
+                    RIGHT
+                </button>
+                <button id="down">
+                    DOWN
+                </button>
+            </div>
         </div>
         <div id=game>
         </div>
@@ -56,6 +69,7 @@
             </h5>
             <p id="toysRetrieved">
             </p>
+            <button id="reload">Reset</button>
         </div>
     </div>
     <script src="js/resources.js"></script>
