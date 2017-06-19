@@ -293,15 +293,15 @@ Toy.prototype.dropOff = function() {
         } else if (player.enemyPoints === player.playerPoints) {
             player.messageBoard = 'It\'s a tie!';
         } else if (player.enemyPoints < 10) {
-            player.messageBoard = 'A valiant effort!';
+            player.messageBoard = player.enemyPoints + ' deaths: a valiant effort!';
         } else if (player.enemyPoints < 20) {
-            player.messageBoard = 'Better luck next time...';
+            player.messageBoard = player.enemyPoints + ' fails, better luck next time...';
         } else if (player.enemyPoints < 30) {
-            player.messageBoard = 'Don\'t quit your day job...';
+            player.messageBoard = player.enemyPoints + '? Don\'t quit your day job...';
         } else if (player.enemyPoints < 40) {
-            player.messageBoard = 'Honestly, that was rather embarrassing';
+            player.messageBoard = 'Honestly, that was rather embarrassing.';
         } else if (player.enemyPoints < 50) {
-            player.messageBoard = 'A valiant effort!';
+            player.messageBoard = 'Well, you\'ve got persistence, at least...';
         } else {
             player.messageBoard = 'You died ' + player.enemyPoints + ' times...that\'s insane.';
         }
