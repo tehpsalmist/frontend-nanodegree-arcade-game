@@ -88,32 +88,40 @@ var Player = function(h, v) {
     this.full = false;
     this.enemyPoints = 0;
     this.playerPoints = 0;
-    this.messageBoard = 'Abi! Clean up your toys!'
+    this.messageBoard = 'Abi! Clean up your toys!';
+    this.pickedUpName = '';
 };
 
-// Udacity: Update the player's position, required method for game
-// Parameter: dt, a time delta between ticks
-
-// I am not sure what this is here for, since it only makes sense to
-// move the player based on keystrokes (at least that's how I did it).
+// Parameter: dt, a time delta between ticks (which isn't in use here, actually)
 Player.prototype.update = function(dt) {
     //Display Scoring
     document.getElementById("enemyPoints").innerHTML = player.enemyPoints;
     document.getElementById("playerPoints").innerHTML = player.playerPoints;
-    /*  ctx.font = '18pt Helvetica';
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'white';
-        ctx.FillText(this.messageBoard, canvas.width / 2, canvas.height - 20);*/
+
+    if (this.y < 240 && this.y > 70) {
+        if (this.full === true) {
+            this.messageBoard = 'Bring the ' + this.pickedUpName + ' back to the rock!';
+        } else {
+        this.messageBoard = 'Careful in the road, Abi!';
+        };
+    };
+    if (this.y > 230 && this.full === true) {
+        this.messageBoard = 'Yay! You made it back!';
+    }
 };
 
 // Draws the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+    ctx.font = '18pt Helvetica';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.fillText(this.messageBoard, 252.5, 575);
 };
 
 // I will confess, I copied this code from somewhere, and changed
-// the values to my liking. I haven't found a reason to swap it out
-// for anything else.
+// the values to my liking. Works like a dream.
 // This moves the player based on the arrow keys.
 Player.prototype.handleInput = function(key){
     if (key === 'left' && this.x > 5) {
@@ -144,6 +152,7 @@ Player.prototype.reset = function() {
     // go pick up the toy she just dropped.
     this.full = false;
     this.enemyPoints++;
+    this.messageBoard = 'No, no, Abi!';
 };
 
 // Class for creating the drop-off rock. New values can be passed in
@@ -219,6 +228,8 @@ Toy.prototype.checkPickUp = function() {
         // player's arms are now "full."
         this.pickedUp = true;
         player.full = true;
+        player.pickedUpName = this.name;
+        player.messageBoard = 'You grabbed the ' + this.name + '!';
     };
     // Once the toy has been labeled "picked up," the if condition
     // does not need to be satisfied exactly anymore. This return
@@ -254,7 +265,7 @@ Toy.prototype.dropOff = function() {
     this.droppingOff = false;
     player.playerPoints++;
     //Display which Toy was dropped off in index.html;
-    var t = document.createTextNode(this.name + '\n ');
+    var t = document.createTextNode(this.name);
     document.getElementById("toysRetrieved").appendChild(t);
     var br = document.createElement("br");
     document.getElementById("toysRetrieved").appendChild(br)
@@ -265,6 +276,36 @@ Toy.prototype.dropOff = function() {
     this.pickedUp = false;
     // Changing full to false allows the player to pick up another toy.
     player.full = false;
+    // Messages to display after a Toy is dropped off
+    if (player.playerPoints === 1) {
+        player.messageBoard = 'Good job! 1 point!';
+    } else if (player.playerPoints === 2) {
+        player.messageBoard = 'Hey, you scored again!';
+    } else if (player.playerPoints === 3) {
+        player.messageBoard = 'Well done, Abi!';
+    } else if (player.playerPoints === 4) {
+        player.messageBoard = 'Nice work, you\'re almost done!';
+    } else if (player.playerPoints === allToys.length) {
+        if (player.enemyPoints === 0) {
+            player.messageBoard = '0 deaths--BEAST MODE'
+        } else if (player.enemyPoints < player.playerPoints) {
+            player.messageBoard = 'Wow, those bugs didn\'t stand a chance!';
+        } else if (player.enemyPoints === player.playerPoints) {
+            player.messageBoard = 'It\'s a tie!';
+        } else if (player.enemyPoints < 10) {
+            player.messageBoard = 'A valiant effort!';
+        } else if (player.enemyPoints < 20) {
+            player.messageBoard = 'Better luck next time...';
+        } else if (player.enemyPoints < 30) {
+            player.messageBoard = 'Don\'t quit your day job...';
+        } else if (player.enemyPoints < 40) {
+            player.messageBoard = 'Honestly, that was rather embarrassing';
+        } else if (player.enemyPoints < 50) {
+            player.messageBoard = 'A valiant effort!';
+        } else {
+            player.messageBoard = 'You died ' + player.enemyPoints + ' times...that\'s insane.';
+        }
+    };
 };
 
 // Character Variables
