@@ -74,8 +74,9 @@ Enemy.prototype.checkCollision = function() {
     return collision;
 };
 
-// Passing in the initial coordinates gives flexibility when adding
-// new features and creating a variety of players.
+// Player class receives only the coordinates. I would have to refactor
+// the code heavily to make the Player class more flexible. Right now, it is
+// basically set up to only have one player.
 var Player = function(h, v) {
     this.sprite = 'images/char-princess-girl.png';
     this.x = h;
@@ -86,6 +87,7 @@ var Player = function(h, v) {
     // Determines whether the player can pick up another toy ("empty")
     // or not ("full"). I designed it to be one-at-a-time gameplay.
     this.full = false;
+    // Initial values for messageBoard and score fields.
     this.enemyPoints = 0;
     this.playerPoints = 0;
     this.messageBoard = 'Abi! Clean up your toys!';
@@ -94,10 +96,10 @@ var Player = function(h, v) {
 
 // Parameter: dt, a time delta between ticks (which isn't in use here, actually)
 Player.prototype.update = function(dt) {
-    //Display Scoring
+    // Display Scoring
     document.getElementById("enemyPoints").innerHTML = player.enemyPoints;
     document.getElementById("playerPoints").innerHTML = player.playerPoints;
-
+    // Displays messageBoard messages based on location and what Toy is in tow.
     if (this.y < 240 && this.y > 70) {
         if (this.full === true) {
             this.messageBoard = 'Bring the ' + this.pickedUpName + ' back to the rock!';
@@ -113,15 +115,13 @@ Player.prototype.update = function(dt) {
 // Draws the player on the screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
+    // draws the messageBoard at the bottom of the canvas
     ctx.font = '18pt Helvetica';
     ctx.textAlign = 'center';
     ctx.fillStyle = 'white';
     ctx.fillText(this.messageBoard, 252.5, 575);
 };
 
-// I will confess, I copied this code from somewhere, and changed
-// the values to my liking. Works like a dream.
 // This moves the player based on the arrow keys.
 Player.prototype.handleInput = function(key){
     if (key === 'left' && this.x > 5) {
@@ -149,9 +149,11 @@ Player.prototype.reset = function() {
     this.x = this.resetLocX;
     this.y = this.resetLocY;
     // This function also empties the player's hands, so she can
-    // go pick up the toy she just dropped.
+    // go pick up a toy again.
     this.full = false;
+    // The enemy scores everytime you touch a bug.
     this.enemyPoints++;
+    // The namesake message displays when a bug is touched.
     this.messageBoard = 'No, no, Abi!';
 };
 
@@ -167,7 +169,11 @@ Rock.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// I realize that's a lot of values to pass in to this class, but being able to
+// predetermine all of this functionality and image specific properties seems
+// worth it to me.
 var Toy = function(h, v, oX, oY, img, n) {
+    // These should all be self-explanatory.
     this.sprite = img;
     this.name = n;
     this.x = h;
@@ -183,9 +189,12 @@ var Toy = function(h, v, oX, oY, img, n) {
     // When pickedUp is true, the toy will move with the player.
     this.pickedUp = false;
     // This variable is used once to cause the drop off chain of functions,
-    // then set back to false to avoid pickup capability while player is full.
+    // then set back to false to avoid activating pickUp capabilities for other
+    // Toys once the player has picked a new one up. This specific glitch
+    // came up while I was building these functions, so I had to refactor to make
+    // sure it couldn't happen anymore.
     this.droppingOff = false;
-    // When droppedOff is true, pickUp() is prevented.
+    // When droppedOff is true, pickUp() of this Toy is prevented.
     this.droppedOff = false;
 };
 
@@ -200,24 +209,30 @@ Toy.prototype.reset = function() {
     this.y = this.resetLocY;
 };
 
-// Runs in engine.js with the player and enemy update functions. This
-// function makes sure that only one toy at a time is picked up/dropped off.
+// Runs in engine.js with the player and enemy update functions.
 Toy.prototype.update = function() {
+    // Only one toy at a time can be picked up by the player, and deposited Toys
+    // don't check for pickup.
     if (player.full === false && this.droppedOff === false) {
         this.checkPickUp();
     };
+    // Any Toy that is picked up will mimic the location[s] of the player.
     if (this.pickedUp === true) {
         this.carry();
     }
+    // Only Toys that are not already dropped off check to see if they have
+    // arrived at the drop off rock.
     if (this.droppedOff === false) {
         this.checkDropOff();
     };
+    // When the drop off rock is reached, and the dropping off variable is
+    // changed, the dropOff function is executed.
     if (this.droppingOff === true) {
         this.dropOff();
     }
 };
 
-// This function is called by toy-update, and determines if the player is
+// This function is called by Toy update, and determines if the player is
 // close enough to pick up the toy.
 Toy.prototype.checkPickUp = function() {
     if (player.x > this.x - 35 &&
@@ -225,10 +240,12 @@ Toy.prototype.checkPickUp = function() {
         player.y > this.y - 35 &&
         player.y < this.y + 35) {
         // If the conditions are met, the toy is picked up, and the
-        // player's arms are now "full."
+        // player's "arms" are now "full."
         this.pickedUp = true;
         player.full = true;
+        // This variable is used for certain message board displays.
         player.pickedUpName = this.name;
+        // Sends a message to the message board
         player.messageBoard = 'You grabbed the ' + this.name + '!';
     };
     // Once the toy has been labeled "picked up," the if condition
@@ -244,8 +261,13 @@ Toy.prototype.carry = function() {
     this.y = player.y + this.offsetY;
 };
 
-// When a toy is brought to the rock, its "dropped off" status is changed.
-// This change triggers the drop off function when it is called by
+// When a toy is brought to the rock, its "dropping off" status is changed.
+// It is important that is be distinguished from "dropped off," because
+// that variable is constantly checked in the update methods, and can cause
+// functions to execute at the wrong time. Using this intermediary state of
+// "dropping off" safely relegates the item to an untouchable state for the
+// remainder of the game.
+// This change triggers the dropOff function when it is called by
 // the update function.
 Toy.prototype.checkDropOff = function() {
     if (rock.x > this.x - 35 &&
@@ -274,7 +296,7 @@ Toy.prototype.dropOff = function() {
     this.droppedOff = true;
     // Changing pickedUp to false unlinks it from the player's location.
     this.pickedUp = false;
-    // Changing full to false allows the player to pick up another toy.
+    // Changing full to false allows the player to pick up another Toy.
     player.full = false;
     // Messages to display after a Toy is dropped off
     if (player.playerPoints === 1) {
@@ -352,7 +374,7 @@ var rock = new Rock(405, 404);
 var allToys = [];
 
 // New toy variables pass in starting x and y, visual Offset x and y,
-// and the sprite image.
+// the sprite image, and name.
 var blueGem = new Toy(10, 12, 7, 23, 'images/Gem Blue.png', 'Blue Gem')
 var greenGem = new Toy(111, 12, 11, 23, 'images/Gem Green.png', 'Green Gem')
 var key = new Toy(212, 12, 12, 23, 'images/Key.png', 'Gold Key')
