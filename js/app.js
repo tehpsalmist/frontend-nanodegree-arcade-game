@@ -97,8 +97,8 @@ var Player = function(h, v) {
 // Parameter: dt, a time delta between ticks (which isn't in use here, actually)
 Player.prototype.update = function(dt) {
     // Display Scoring
-    document.getElementById("enemyPoints").innerHTML = player.enemyPoints;
-    document.getElementById("playerPoints").innerHTML = player.playerPoints;
+    document.getElementById("enemyPoints").innerHTML = this.enemyPoints;
+    document.getElementById("playerPoints").innerHTML = this.playerPoints;
     // Displays messageBoard messages based on location and what Toy is in tow.
     if (this.y < 240 && this.y > 70) {
         if (this.full === true) {
@@ -248,7 +248,7 @@ Toy.prototype.checkPickUp = function() {
         // Sends a message to the message board
         player.messageBoard = 'You grabbed the ' + this.name + '!';
     };
-    // Once the toy has been labeled "picked up," the if condition
+    // Once the toy has been labeled "pickedUp," the if condition
     // does not need to be satisfied exactly anymore. This return
     // statement alone will trigger the carry function, which mimics
     // the player's location + offset values.
