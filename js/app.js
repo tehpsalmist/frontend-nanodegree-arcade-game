@@ -406,6 +406,10 @@ document.addEventListener('keyup', function(e) {
 document.getElementById("reload").addEventListener("click", function(){
     location.reload(true);
 });
+
+window.onload = function() {
+    document.getElementById('game').click();
+};
 // Event handlers for the d-pad buttons, to try out mobile play
 /* Unfortunately, it didn't work smoothly enough.
 
