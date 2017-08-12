@@ -22,8 +22,6 @@ Abi's toys are still in the pool, and she needs to collect them and bring them b
 * Every time you deposit a toy at the rock, you get a point. Great job, Abi!
 * Compare your score with the bugs at the end, and if you don't like it, hit Reset and try again!
 
-<<<<<<< HEAD
-### Good Luck!
 =======
 ### Good Luck!
->>>>>>> origin/master
+
