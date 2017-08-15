@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>No No, Abi!</title>
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/enquire.min.js"></script>
+    <script type="text/javascript">
+        enquire.register("screen and (max-width:800px)", function() {
+        	document.getElementsByTagName("meta")[1].setAttribute("content", "width=505px, user-scalable=0");
+        });
+    </script>
 </head>
 <body>
-    <div>
+    <div class="mobile-disappear">
         <h1>
             No, No, Abi!
         </h1>
@@ -17,10 +23,10 @@
     </div>
     <div class="d-flex">
         <div class="instructions">
-            <h4>
+            <h4 class="mobile-disappear">
                 Instructions
             </h4>
-            <ul>
+            <ul class="mobile-disappear">
                 <li>Use the arrow keys on your keyboard to move Abi, or tap the d-pad below.</li>
                 <li>Make your way carefully across the road to pick up the toys one at a time.</li>
                 <li>Bring each toy to the rock to deposit it and free your hands for another toy.</li>
@@ -29,7 +35,7 @@
                 <li>Not happy with the score? Reset the game to try again.</li>
             </ul>
             <!--I tried to put a d-pad in for use on mobile devices. Fun to try, but didn't really work, because when you tap the screen too quickly, it zooms in, rather than simply executing twice.-->
-            <div class="d-pad">
+            <div class="d-pad d-flex">
                 <button id="up">
                     UP
                 </button>

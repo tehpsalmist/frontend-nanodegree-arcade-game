@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    margin: 0;
 }
 
 h1 {
@@ -25,10 +26,6 @@ ul {
     text-align: left;
 }
 
-/*
-
-Failed d-pad attempt
-
 .d-pad {
     height: 300px;
     width: 100%;
@@ -44,8 +41,6 @@ Failed d-pad attempt
     width: 50%;
     height: 40%;
 }
-
-*/
 
 #game {
     width: 40%;
@@ -78,4 +73,44 @@ button {
 
 #reload {
     margin-top: 50px
+}
+
+@media screen and (max-width: 800px) {
+    .mobile-disappear {
+        display: none;
+    }
+    .d-pad {
+        height: 250px;
+    }
+    #game {
+        order: 1;
+        width: 505px;
+        height: 555px;
+        overflow: hidden;
+    }
+    #gameCanvas {
+        position: fixed;
+        top: -50px;
+        left: 0;
+    }
+    .instructions {
+        order: 3;
+        width: 315px;
+        margin: 0;
+    }
+    .scores {
+        order: 2;
+        width: 190px;
+        margin: 0;
+        background-color: #ffff00;
+    }
+    #reload {
+        margin: 0 auto;
+    }
+    .score-title {
+        height: 25px;
+    }
+    button {
+        background-color: #0099ff;
+    }
 }

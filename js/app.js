@@ -411,7 +411,7 @@ window.onload = function() {
     document.getElementById('game').click();
 };
 // Event handlers for the d-pad buttons, to try out mobile play
-/* Unfortunately, it didn't work smoothly enough.
+// Trying it again!
 
 document.getElementById("up").addEventListener("click", function(){
     if (player.y > 0) {
@@ -436,4 +436,3 @@ document.getElementById("right").addEventListener("click", function(){
         ctx.clearRect(0, 0, 505, 100);
     };
 });
-*/
